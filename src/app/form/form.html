@@ -1,51 +1,56 @@
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
-
-  <label>E-mail</label>
-  <input
-    type="email"
-    formControlName="email"
-    [class.invalid]="myForm.get('email')?.invalid && myForm.get('email')?.touched"
-  >
-
-  @if (myForm.get('email')?.invalid && myForm.get('email')?.touched) {
-
-    <div class="error">
-      @if (myForm.get('email')?.errors?.['required']) {
-        <small>Email is required</small>
-      }
-
-      @if (myForm.get('email')?.errors?.['email']) {
-        <small>Incorrect email</small>
-      }
+    <label>E-mail</label>
+    <input type="email" formControlName="email" [class.invalid]="myForm.get('email')?.invalid && myForm.get('email')?.touched">
+    
+    @if (myForm.get('email')?.invalid && myForm.get('email')?.touched) {
+        <div class="error">
+            @if (myForm.get('email')?.errors?.['required']) {
+                <small>Email is required</small>
+            }
+            @if (myForm.get('email')?.errors?.['email']) {
+                <small>Incorrect email</small>
+            }
+        </div>
+    }
+    <br>
+    
+    <label>Password</label>
+    <input type="password" formControlName="password" [class.invalid]="myForm.get('password')?.invalid && myForm.get('password')?.touched">
+    
+    @if (myForm.get('password')?.invalid && myForm.get('password')?.touched) {
+        <div class="error">
+            @if (myForm.get('password')?.errors?.['required']) {
+                <small>Password is required</small>
+            }
+            @if (myForm.get('password')?.errors?.['minlength']) {
+                <small>Minimum 6 symbols</small>
+            }
+        </div>
+    }
+    <br>
+    
+    <label>
+        <input type="checkbox" formControlName="agree">I agree
+    </label>
+    <br>
+    
+    <div formArrayName="hobbies">
+        <h3>Enter Hobbies</h3>
+        @for (hobby of hobbies.controls; track $index) {
+            <div>
+                <input [formControlName]="$index">
+                <button type="button" (click)="removeHobby($index)">Delete</button>
+            </div>
+        }
     </div>
-  }
-
-  <br>
-
-  <label>Password</label>
-  <input
-    type="password"
-    formControlName="password"
-    [class.invalid]="myForm.get('password')?.invalid && myForm.get('password')?.touched"
-  >
-
-  @if (myForm.get('password')?.invalid && myForm.get('password')?.touched) {
-
-    <div class="error">
-      @if (myForm.get('password')?.errors?.['required']) {
-        <small>Password is required</small>
-      }
-
-      @if (myForm.get('password')?.errors?.['minlength']) {
-        <small>Minimum 6 symbols</small>
-      }
-    </div>
-  }
-
-  <br>
-
-  <button type="submit" [disabled]="myForm.invalid">
-    Send
-  </button>
-
+    
+    <button type="button" (click)="addHobby()">Add hobby</button>
+    <br>
+    
+    <button type="submit" [disabled]="myForm.invalid">Send</button>
 </form>
+
+<h3>Form object:</h3>
+<pre>
+{{ myForm.value | json }}
+</pre>

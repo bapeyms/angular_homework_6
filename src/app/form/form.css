@@ -1,8 +1,8 @@
 form {
-  width: 300px;
+  width: 350px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 2px;
 }
 
 input {
@@ -20,7 +20,18 @@ input.invalid {
   font-size: 12px;
 }
 
+button {
+  width: fit-content;
+  padding: 8px 12px;
+}
+
 button:disabled {
   background-color: gray;
   cursor: not-allowed;
+}
+
+pre {
+  background: #f4f4f4;
+  padding: 10px;
+  border-radius: 5px;
 }
