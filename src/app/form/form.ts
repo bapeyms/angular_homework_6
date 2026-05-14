@@ -17,6 +17,7 @@ import {
 export class Form {
   
   myForm: FormGroup;
+  submittedData: any = null;
 
   constructor(private fb: FormBuilder) {
 
@@ -47,8 +48,22 @@ export class Form {
   }
 
   onSubmit() {
-    if (this.myForm.valid) {
-      console.log(this.myForm.value);
+    
+    if (this.myForm.invalid) {
+      this.myForm.markAllAsTouched();
+      return;
     }
+
+    this.submittedData = this.myForm.value;
+
+    console.log(this.myForm.value);
+
+    this.myForm.reset({
+      email: '',
+      password: '',
+      agree: false
+    });
+
+    this.hobbies.clear();
   }
 }

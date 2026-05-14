@@ -50,7 +50,7 @@
     <button type="submit" [disabled]="myForm.invalid">Send</button>
 </form>
 
-<h3>Form object:</h3>
-<pre>
-{{ myForm.value | json }}
-</pre>
+@if (submittedData) {
+    <h3>Form object:</h3>
+    <pre>{{ submittedData | json }}</pre>
+}
