@@ -1,1 +1,13 @@
-<p>form works!</p>
+<form (ngSubmit)="onSubmit()">
+
+    <label>E-mail</label> 
+    <input type="email" [(ngModel)]="user.email" name="email">
+    <br>
+
+    <label>Password</label>
+    <input type="password" [(ngModel)]="user.password" name="password">
+    <br>
+    
+    <button type="submit">Send</button>
+</form>
+

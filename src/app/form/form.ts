@@ -1,10 +1,19 @@
 import { Component } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-form',
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './form.html',
   styleUrl: './form.css',
 })
-export class Form {}
+export class Form {
+  user = {
+    email: '',
+    password: ''
+  }
+
+  onSubmit() {
+    console.log(this.user)
+  }
+}
