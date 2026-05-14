@@ -1,13 +1,51 @@
-<form (ngSubmit)="onSubmit()">
+<form [formGroup]="myForm" (ngSubmit)="onSubmit()">
 
-    <label>E-mail</label> 
-    <input type="email" [(ngModel)]="user.email" name="email">
-    <br>
+  <label>E-mail</label>
+  <input
+    type="email"
+    formControlName="email"
+    [class.invalid]="myForm.get('email')?.invalid && myForm.get('email')?.touched"
+  >
 
-    <label>Password</label>
-    <input type="password" [(ngModel)]="user.password" name="password">
-    <br>
-    
-    <button type="submit">Send</button>
+  @if (myForm.get('email')?.invalid && myForm.get('email')?.touched) {
+
+    <div class="error">
+      @if (myForm.get('email')?.errors?.['required']) {
+        <small>Email is required</small>
+      }
+
+      @if (myForm.get('email')?.errors?.['email']) {
+        <small>Incorrect email</small>
+      }
+    </div>
+  }
+
+  <br>
+
+  <label>Password</label>
+  <input
+    type="password"
+    formControlName="password"
+    [class.invalid]="myForm.get('password')?.invalid && myForm.get('password')?.touched"
+  >
+
+  @if (myForm.get('password')?.invalid && myForm.get('password')?.touched) {
+
+    <div class="error">
+      @if (myForm.get('password')?.errors?.['required']) {
+        <small>Password is required</small>
+      }
+
+      @if (myForm.get('password')?.errors?.['minlength']) {
+        <small>Minimum 6 symbols</small>
+      }
+    </div>
+  }
+
+  <br>
+
+  <button type="submit" [disabled]="myForm.invalid">
+    Send
+  </button>
+
 </form>
-
